@@ -44,17 +44,14 @@ class ViewPerson {
         }
 
         //平均年齢の算出
-        double ageSum = 0;//年齢の合計
-        double cnt = 0 ;//人数
+
         for (Map.Entry entry:birthplacePersonMap.entrySet()) {
-            System.out.print(((Birthplace)entry.getKey()).getName());
-            ageSum = 0;//クリア
-            cnt = 0;//クリア
+            double ageSum = 0,cnt = 0;//クリア
             for (Person person:(List<Person>)entry.getValue()) {
                 ageSum += person.getAge();
                 cnt++;
             }
-            System.out.println(String.format(":%.1f歳",ageSum / cnt));
+            System.out.println(String.format("%s:%.1f歳",((Birthplace) entry.getKey()).getName(),ageSum / cnt));
         }
 
         //男女別平均年齢の算出
@@ -62,21 +59,21 @@ class ViewPerson {
         for (Map.Entry entry:birthplacePersonMap.entrySet()) {
             System.out.println(((Birthplace)entry.getKey()).getName());
             for (Person person:(List<Person>)entry.getValue()) {
-                ageMenSum = 0;
-                ageWomenSum = 0;
-                menCnt = 0;
-                womenCnt = 0;
-                if (person.getGender().equals(Gender.MEN)) {
-                    ageMenSum += person.getAge();
-                    menCnt++;
+
+                if (person.getGender().equals(Gender.MEN))) {
+                    System.out.println(person);
+
                 } else {
                     ageWomenSum += person.getAge();
                     womenCnt++;
+                    ageMenSum = 0;
+                    menCnt = 0;
                 }
-                ageSum += person.getAge();
+
             }
             System.out.println(String.format("男性:%.1f歳",(ageMenSum / menCnt)));
             System.out.println(String.format("女性:%.1f歳",(ageWomenSum / womenCnt)));
+
         }
     }
 }
