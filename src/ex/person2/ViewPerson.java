@@ -37,6 +37,7 @@ class ViewPerson {
         }
 
         //分類できたか表示
+        System.out.println("分類チェック");
         for (Map.Entry entry:birthplacePersonMap.entrySet()) {
             System.out.println(entry.getKey());
             for (Person person:(List<Person>)entry.getValue())
@@ -44,36 +45,25 @@ class ViewPerson {
         }
 
         //平均年齢の算出
-
+        System.out.println("平均年齢");
         for (Map.Entry entry:birthplacePersonMap.entrySet()) {
-            double ageSum = 0,cnt = 0;//クリア
+            double sum= 0,cnt = 0,sumMen = 0,sumWomen = 0,menCnt = 0,womenCnt = 0;
             for (Person person:(List<Person>)entry.getValue()) {
-                ageSum += person.getAge();
+                sum += person.getAge();
                 cnt++;
-            }
-            System.out.println(String.format("%s:%.1f歳",((Birthplace) entry.getKey()).getName(),ageSum / cnt));
-        }
-
-        //男女別平均年齢の算出
-        double ageMenSum = 0,ageWomenSum = 0,menCnt = 0,womenCnt = 0;
-        for (Map.Entry entry:birthplacePersonMap.entrySet()) {
-            System.out.println(((Birthplace)entry.getKey()).getName());
-            for (Person person:(List<Person>)entry.getValue()) {
-
-                if (person.getGender().equals(Gender.MEN))) {
-                    System.out.println(person);
-
+                if (person.getGender().equals(Gender.MEN)) {
+                    sumMen += person.getAge();
+                    menCnt++;
                 } else {
-                    ageWomenSum += person.getAge();
+                    sumWomen += person.getAge();
                     womenCnt++;
-                    ageMenSum = 0;
-                    menCnt = 0;
                 }
-
             }
-            System.out.println(String.format("男性:%.1f歳",(ageMenSum / menCnt)));
-            System.out.println(String.format("女性:%.1f歳",(ageWomenSum / womenCnt)));
-
+            System.out.println(String.format("地域:%s",((Birthplace) entry.getKey()).getName()));
+            System.out.println(String.format("全体平均:%.1f歳", sum/ cnt));
+            System.out.println(String.format("男性平均:%.1f歳",(sumMen / womenCnt)));
+            System.out.println(String.format("女性平均:%.1f歳",(sumWomen / womenCnt)));
         }
+
     }
 }
